@@ -48,10 +48,6 @@ from products.serializers import PrimaryProductSerializer
 
 
 
-
-
-
-
 # @api_view(["GET", "POST"])
 # def api_home(request, *args, **kwargs):
 
