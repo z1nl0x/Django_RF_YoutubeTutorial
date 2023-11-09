@@ -9,7 +9,7 @@ from django.forms.models import model_to_dict
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from products.serializers import PrimaryProductSerializer
+from products.serializers import ProductSerializer
 
 # @api_view(["GET", "POST"])
 # def api_home(request, *args, **kwargs):
@@ -87,16 +87,29 @@ from products.serializers import PrimaryProductSerializer
 
 # BEGINNING WITH SERIALIZERS
 
-@api_view(["GET"])
+@api_view(["POST"])
 def api_home(request, *args, **kwargs):
 
-    instance = Product.objects.all().order_by("?").first()
-    data = {}
+    # GET TYPE OF THING WITH SERIALIZERS
+
+    # instance = Product.objects.all().order_by("?").first()
+    # data = {}
     
-    if instance:
+    # if instance:
         
-        # data = model_to_dict(model_data, fields=['id','title', 'price', 'sale_price'])
+    #     # data = model_to_dict(model_data, fields=['id','title', 'price', 'sale_price'])
 
-        data = PrimaryProductSerializer(instance).data
+    #     data = PrimaryProductSerializer(instance).data
 
-    return JsonResponse(data)
+
+    # POST TYPE OF THING WITH SERIALIZERS
+
+    # data = request.data
+    serializer = ProductSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        # instance = serializer.save()
+        # instance = serializer.data
+        print(serializer.data)
+        return Response(serializer.data)
+    
+    return Response({"invalid": "not good data"}, status=400)
