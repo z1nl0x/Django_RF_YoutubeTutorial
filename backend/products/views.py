@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, mixins
 from .models import Product
 from .serializers import ProductSerializer
 
@@ -83,8 +83,62 @@ class ProductDeleteAPIView(generics.DestroyAPIView):
 product_delete_view = ProductDeleteAPIView.as_view()
 
 
-class ProductMixinView(generics.GenericAPIView):
-    pass
+class ProductMixinView(mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin, generics.GenericAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    lookup_field = "pk"
+    
+    def get(self, request, *args, **kwargs):
+        print(args, kwargs)
+
+        pk = kwargs.get("pk")
+        if pk is not None:
+            return self.retrieve(request, *args, **kwargs)
+
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+    
+    def put(self, request, *args, **kwargs):
+        
+        pk = kwargs.get("pk")
+        
+        if pk is not None:
+            return self.update(request, *args, **kwargs)
+        
+    def delete(self, request, *args, **kwargs):
+        
+        pk = kwargs.get("pk")
+        
+        if pk is not None:
+            return self.destroy(request, *args, **kwargs)
+
+    
+    def perform_create(self, serializer):
+        # serializer.save(user=self.request.user)
+
+        # print(serializer.validated_data)
+
+        title = serializer.validated_data.get("title")
+        content = serializer.validated_data.get("content") or None
+        
+        if content is None:
+            content = "This is a single view doing cool stuffs!"
+
+        serializer.save(content=content)
+
+    def perform_update(self, serializer):
+        instance = serializer.save()
+
+        if not instance.content:
+            instance.content = "This is a perform update by the mixins and generic api view!"
+    
+    def perform_destroy(self, instance):
+        # instance modification if you want it before deleting
+        super().perform_destroy(instance)
+
+product_mixin_view = ProductMixinView.as_view()
 
 
 # We can use the generics.ListCreateAPIView instead of using a ListAPIView.
