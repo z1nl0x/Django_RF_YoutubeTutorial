@@ -68,7 +68,7 @@ class ProductUpdateAPIView(generics.UpdateAPIView):
         if not instance.content:
             instance.content = instance.title
 
-product_dupdate_view = ProductUpdateAPIView.as_view()
+product_update_view = ProductUpdateAPIView.as_view()
 
 
 class ProductDeleteAPIView(generics.DestroyAPIView):
