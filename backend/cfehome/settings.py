@@ -13,7 +13,7 @@ import django_heroku
 import sys
 import os
 from pathlib import Path
-
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -130,12 +130,23 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# auth_classes = [
+#     "rest_framework.authentication.SessionAuthentication",
+#     "api.authentication.TokenAuthentication"
+# ]
+# if DEBUG:
+#     [
+#         "api.authentication.TokenAuthentication",
+#     ]
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",
-        "api."
+        "api.authentication.TokenAuthentication"
     ],
-    "DEFAULT_PERMISSION_CLASSES": []
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+    ]
 }
 
 
