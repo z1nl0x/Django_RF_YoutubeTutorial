@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import sys
 import os
 from pathlib import Path
-
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -130,6 +130,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+<<<<<<< HEAD
 # REST_FRAMEWORK = {
 #     "DEFAULT_AUTHENTICATION_CLASSES": [
 #         "rest_framework.authentication.SessionAuthentication",
@@ -137,5 +138,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     ],
 #     "DEFAULT_PERMISSION_CLASSES": []
 # }
+=======
+# auth_classes = [
+#     "rest_framework.authentication.SessionAuthentication",
+#     "api.authentication.TokenAuthentication"
+# ]
+# if DEBUG:
+#     [
+#         "api.authentication.TokenAuthentication",
+#     ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "api.authentication.TokenAuthentication"
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+    ]
+}
+>>>>>>> 48f52df45970218549d74def5f49452ee82f1efa
 
 
