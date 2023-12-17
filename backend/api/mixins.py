@@ -15,3 +15,4 @@ class UserQuerySetMixin():
         qs = super().get_queryset(*args, **kwargs)
         print(qs)
         return qs.filter(**lookup_data)
+    

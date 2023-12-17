@@ -130,7 +130,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-<<<<<<< HEAD
 # REST_FRAMEWORK = {
 #     "DEFAULT_AUTHENTICATION_CLASSES": [
 #         "rest_framework.authentication.SessionAuthentication",
@@ -138,7 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     ],
 #     "DEFAULT_PERMISSION_CLASSES": []
 # }
-=======
+
 # auth_classes = [
 #     "rest_framework.authentication.SessionAuthentication",
 #     "api.authentication.TokenAuthentication"
@@ -157,6 +156,6 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticatedOrReadOnly",
     ]
 }
->>>>>>> 48f52df45970218549d74def5f49452ee82f1efa
+
 
 
