@@ -10,8 +10,6 @@ auth_response = requests.post(auth_endpoint, json={"username": username, "passwo
 print(auth_response.json())
 # print(auth_response.status_code)
 
-
-
 if auth_response.status_code == 200:
     token = auth_response.json()['token']
     headers = {
@@ -21,6 +19,11 @@ if auth_response.status_code == 200:
 
 
     get_response = requests.get(endpoint, headers=headers)
-
-    print(get_response.json())
+    data = get_response.json()
+    next_url = data['next']
+    results = data['results']
+    
+    # print(get_response.json())
+    print("next_url", next_url)
+    print(results)
     print(get_response.status_code)
