@@ -13,4 +13,4 @@ def validate_title_no_hello(value):
         raise serializers.ValidationError(f"Teste is not allowed")
     return value
 
-unique_product_title = UniqueValidator(queryset=Product.objects.all())
+unique_product_title = UniqueValidator(queryset=Product.objects.all(), lookup="iexact")
