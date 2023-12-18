@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-import django_heroku
+
 import sys
 import os
 from pathlib import Path
@@ -130,6 +130,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# REST_FRAMEWORK = {
+#     "DEFAULT_AUTHENTICATION_CLASSES": [
+#         "rest_framework.authentication.SessionAuthentication",
+#         "api"
+#     ],
+#     "DEFAULT_PERMISSION_CLASSES": []
+# }
+
 # auth_classes = [
 #     "rest_framework.authentication.SessionAuthentication",
 #     "api.authentication.TokenAuthentication"
@@ -148,5 +156,6 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticatedOrReadOnly",
     ]
 }
+
 
 
