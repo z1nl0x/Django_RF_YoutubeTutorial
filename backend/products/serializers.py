@@ -16,17 +16,17 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = [
-            'user',
+            # 'user',
             'url',
             'edit_url',
             # 'email',
             # 'name',
-            'id',
+            'pk',
             'title',
             'content',
             'price',
             'sale_price',
-            'my_discount'
+            'my_discount',
         ]
 
     # def validate_title(self, value):

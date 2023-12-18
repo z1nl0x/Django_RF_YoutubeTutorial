@@ -41,7 +41,6 @@ class ProductListCreateAPIView(UserQuerySetMixin, StaffEditorPermissionMixin, ge
     serializer_class = ProductSerializer
     # authentication_classes = [authentication.SessionAuthentication, TokenAuthentication]
     # permission_classes = [permissions.DjangoModelPermissions]
-    
     # permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
 
     def perform_create(self, serializer):
@@ -57,14 +56,14 @@ class ProductListCreateAPIView(UserQuerySetMixin, StaffEditorPermissionMixin, ge
 
         serializer.save(user=self.request.user, content=content)
 
-    def get_queryset(self, *args, **kwargs):
-        qs = super().get_queryset(*args, **kwargs)
-        request = self.request
-        user = request.user
-        # print(request.user)
-        if not user.is_authenticated:
-            return Product.objects.none()
-        return qs.filter(user=request.user)
+    # def get_queryset(self, *args, **kwargs):
+    #     qs = super().get_queryset(*args, **kwargs)
+    #     request = self.request
+    #     user = request.user
+    #     # print(request.user)
+    #     if not user.is_authenticated:
+    #         return Product.objects.none()
+    #     return qs.filter(user=request.user)
 
 
 product_list_create_view = ProductListCreateAPIView.as_view()
